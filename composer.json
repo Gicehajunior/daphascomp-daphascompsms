@@ -37,12 +37,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DaphasBulkSmS\\OnfonDeveloper\\": "src/"
+            "OnfonDeveloperV1Lib\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DaphasBulkSmS\\OnfonDeveloper\\Tests\\": "tests/"
+            "OnfonDeveloperV1Lib\\Tests\\": "tests/"
         }
     },
     "scripts": {
