@@ -1,0 +1,37 @@
+
+# Successful Response 2
+
+## Structure
+
+`SuccessfulResponse2`
+
+## Fields
+
+| Name | Type | Tags | Description | Getter | Setter |
+|  --- | --- | --- | --- | --- | --- |
+| `groupId` | `string` | Required | - | getGroupId(): string | setGroupId(string groupId): void |
+| `groupName` | `string` | Required | - | getGroupName(): string | setGroupName(string groupName): void |
+| `clientId` | `string` | Required | - | getClientId(): string | setClientId(string clientId): void |
+| `client` | `?string` | Required | - | getClient(): ?string | setClient(?string client): void |
+| `description` | `string` | Required | - | getDescription(): string | setDescription(string description): void |
+| `parentId` | `string` | Required | - | getParentId(): string | setParentId(string parentId): void |
+| `contacts` | `int` | Required | - | getContacts(): int | setContacts(int contacts): void |
+| `updateDate` | `string` | Required | - | getUpdateDate(): string | setUpdateDate(string updateDate): void |
+| `createDate` | `string` | Required | - | getCreateDate(): string | setCreateDate(string createDate): void |
+
+## Example (as JSON)
+
+```json
+{
+  "groupId": "26",
+  "groupName": "Test group",
+  "clientId": "1",
+  "client": null,
+  "description": "",
+  "parentId": "",
+  "contacts": 0,
+  "updateDate": "2022-10-04T08:40:07Z",
+  "createDate": "2022-10-04T08:40:07Z"
+}
+```
+

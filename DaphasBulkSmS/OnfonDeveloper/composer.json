@@ -1,0 +1,61 @@
+{
+    "name": "daphascomp/daphascompsms",
+    "description": "# Authentication  Requests made to our APIs must be authenticated, there are two ways to do this:  1. Authenticating using your API apiUsername and apiPassword - `Basic Auth` 2. Authenticating using an Auth Token - `Bearer Token`  ## Method 1: Basic Auth  Basic Authentication is a method for an HTTP user agent (e.g., a web browser) to provide a apiUsername and apiPassword when making a request.  When employing Basic Authentication, users include an encoded string in the Authorization header of each request they make. The string is used by the request’s recipient to verify users’ identity and rights to access a resource.  The Authorization header follows this format:  > Authorization: Basic base64(apiUsername:apiPassword)  So if your apiUsername and apiPassword are `onfon` and `!@pas123`, the combination is `onfon:!@pas123`, and when base64 encoded, this becomes `b25mb246IUBwYXMxMjM=`. So requests made by this user would be sent with the following header:  > Authorization: Basic b25mb246IUBwYXMxMjM=  | Description                                                                                    | | ---------------------------------------------------------------------------------------------- | | **apiUsername** `String` `Required` <br> Your onfon account apiUsername, retrieved from portal | | **apiPassword** `String` `Required` <br> Your onfon account apiPassword, retrieved from portal |  ## Method 2: Bearer Tokens  This authentication stategy allows you to authenticate using JSON Web Token ``JWT` that will expire after given duration.  Each Access Token is a `JWT`, an encoded JSON object with three parts: the `header`, the `payload`, and the `signature`. The following is an example Access Token generated for Conversations  > Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c  ### Getting the token  To generate the token, make a `POST` request to `/v1/authorization` endpoint with your `apiUsername` and `apiPassword` This request should be made from your server and not on the client side such as browser or mobile environment.  You will receive a JSON similar to below:  `{ \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\", \"validDurationSeconds\": 3600}`  You can use the token received to make API calls. The token will be valid for value of `validDurationSeconds`, before which you should generate a new token.  #### Request Body  ``` {  \"apiUsername\": \"root\",  \"apiPassword\": \"hakty11\" } ```  #### Response Body  ``` {     \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\",     \"validDurationSeconds\": 3600 } ```  #### Example Curl  ``` curl --location --request POST 'https://apis.onfonmedia.co.ke/v1/authorization' \\ --data-raw '{  \"apiUsername\": \"correctapiUsername\",  \"apiPassword\": \"correctapiPassword\" } ```  #### Making an API call  You will be required to pass the token in `Authorization` header prefixed by `Bearer` when calling other endpoints.  Example `Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`",
+    "type": "library",
+    "keywords": [
+        "Onfon Developer V1",
+        "API",
+        "SDK"
+    ],
+    "homepage": "https://www.apimatic.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "APIMatic Code Generator",
+            "email": "support@apimatic.io",
+            "homepage": "https://www.apimatic.io",
+            "role": "API Tool"
+        },
+        {
+            "name": "Giceha Junior",
+            "email": "gicehajunior76@daphascomp.com",
+            "homepage": "https://github.com/Gicehajunior",
+            "role": "Contributer, https://github.com/Gicehajunior/daphascomp-daphascompsms.git"
+        }
+    ],
+    "require": {
+        "php": ">=7.2 <8.2",
+        "ext-json": "*",
+        "apimatic/unirest-php": "^4.0.0",
+        "apimatic/core-interfaces": "~0.1.0",
+        "apimatic/core": "~0.1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "phan/phan": "5.3.1",
+        "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "DaphasBulkSmS\\OnfonDeveloper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DaphasBulkSmS\\OnfonDeveloper\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html=coverage",
+        "lint-src": "phpcs --standard=phpcs-ruleset.xml src/",
+        "lint-src-fix": "phpcbf --standard=phpcs-ruleset.xml src/",
+        "lint-tests": "phpcs --standard=phpcs-ruleset.xml tests/",
+        "lint-tests-fix": "phpcbf --standard=phpcs-ruleset.xml tests/",
+        "analyze": "phan --allow-polyfill-parser",
+        "lint": [
+            "@lint-src",
+            "@lint-tests"
+        ]
+    }
+}
